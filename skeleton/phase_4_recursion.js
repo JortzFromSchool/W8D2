@@ -49,3 +49,54 @@ function deepDup(arr) {
     };
     return result;
 };
+
+
+
+function bSearch(arr, target) {
+    if (arr.length === 0) {
+        return null;
+    };
+    let mid = Math.floor(arr.length / 2);
+
+    if (arr[mid] === target) {
+        return mid;
+    };
+    if (arr[mid] > target) {
+        return bSearch(arr.slice(0, mid), target);
+    };
+    if (arr[mid] < target) {
+        let searchResult = bSearch(arr.slice(mid+1), target)
+
+        if (searchResult === null) {
+            return null;
+        } else {
+            return mid + 1 + searchResult;
+        };
+    };
+};
+
+
+function merge(left, right) {
+    let merged = [];
+    while (!(left.length === 0 || right.length === 0)) {
+        if (left[0] <= right[0]) {
+            merged.push(left.shift());
+        } else {
+            merged.push(right.shift());
+        };
+    };
+    merged = merged.concat(left);
+    merged = merged.concat(right);
+    return merged;
+};
+
+function mergeSort(arr) {
+    if (arr.length <= 1) {
+        return arr;
+    }; 
+    let mid = Math.floor(arr.length / 2);
+    let sortedLeft = mergeSort(arr.slice(0, mid));
+    let sortedRight = mergeSort(arr.slice(mid));
+
+    return merge(sortedLeft, sortedRight);
+};
