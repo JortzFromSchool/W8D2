@@ -20,3 +20,18 @@ Array.prototype.bubbleSort = function () {
     return arr;
 };
 
+
+String.prototype.subStrings = function () {
+    let arr = [];
+    for (let i = 0; i <= this.length; i++) {
+        for (let j = i; j <= this.length; j++) {
+            if (i === j) {
+                continue;
+            }
+            if (!arr.includes(this.slice(i, j))) {
+                arr.push(this.slice(i, j));
+            };
+        };
+    };
+    return arr;
+};
